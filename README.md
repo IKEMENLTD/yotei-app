@@ -1,1 +1,1 @@
-# yotei-app
+# yotei-app　教室の予定を管理するアプリです。
