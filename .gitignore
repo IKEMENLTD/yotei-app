@@ -1,0 +1,11 @@
+# 秘密情報
+.env
+.env.local
+.env.*.local
+
+# 依存パッケージ
+node_modules/
+
+# OS が作るファイル
+.DS_Store
+Thumbs.db

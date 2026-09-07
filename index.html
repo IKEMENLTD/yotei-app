@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教室の予定</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <h1>教室の予定</h1>
+  <button type="button" class="primary" id="add-button">予定を追加</button>
+</header>
+
+<main>
+
+  <!-- 一覧画面 -->
+  <div id="view-list">
+    <section class="filter">
+      <div class="filter-fields">
+        <label>開始日 <input type="date" id="filter-from"></label>
+        <label>終了日 <input type="date" id="filter-to"></label>
+        <button type="button" id="filter-reset">今日以降に戻す</button>
+      </div>
+      <p class="filter-status" id="filter-status"></p>
+
+      <div class="summary-block">
+        <button type="button" id="summarize-button">表示中のメモを要約</button>
+        <p class="hint">メモの本文と日付だけを送ります。教室名・講師名は送りません。</p>
+        <div id="summary-result" class="summary-result" hidden></div>
+      </div>
+    </section>
+
+    <section id="list" class="list" aria-live="polite"></section>
+  </div>
+
+  <!-- 登録・変更フォーム -->
+  <div id="view-form" hidden>
+    <form id="schedule-form" novalidate>
+      <h2 id="form-title">予定を追加</h2>
+
+      <div class="field">
+        <label for="f-date">日付 <span class="required">必須</span></label>
+        <input type="date" id="f-date">
+        <p class="error" id="e-date" hidden></p>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-start">開始時間 <span class="required">必須</span></label>
+          <input type="time" id="f-start">
+          <p class="error" id="e-start_time" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-end">終了時間 <span class="required">必須</span></label>
+          <input type="time" id="f-end">
+          <p class="error" id="e-end_time" hidden></p>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-room">教室 <span class="required">必須</span></label>
+          <select id="f-room"></select>
+          <p class="error" id="e-room_id" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-instructor">講師 <span class="required">必須</span></label>
+          <select id="f-instructor"></select>
+          <p class="error" id="e-instructor_id" hidden></p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-status">状態</label>
+        <select id="f-status">
+          <option value="scheduled">予定</option>
+          <option value="canceled">休講</option>
+        </select>
+        <p class="hint">休講にしても予定は消えません。一覧に休講として残ります。</p>
+      </div>
+
+      <div class="field">
+        <label for="f-note">メモ</label>
+        <input type="text" id="f-note" maxlength="100">
+        <p class="hint">業務上の補足のみ。体調や家庭の事情など個人の事情は書かないでください。</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary">保存</button>
+        <button type="button" id="form-cancel">やめる</button>
+      </div>
+    </form>
+  </div>
+
+</main>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="store.js"></script>
+<script src="summarize.js"></script>
+<script src="ui.js"></script>
+
+</body>
+</html>

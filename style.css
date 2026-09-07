@@ -1,0 +1,269 @@
+:root {
+  --line: #d8d8d8;
+  --muted: #6b6b6b;
+  --accent: #1d5c9c;
+  --canceled: #999;
+  --error: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  color: #222;
+  background: #fafafa;
+  line-height: 1.6;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.app-header h1 { font-size: 1.25rem; margin: 0; }
+
+main { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+
+button {
+  font: inherit;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* 絞り込み */
+.filter {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter label { font-size: 0.9rem; color: var(--muted); }
+.filter input { font: inherit; padding: 0.3rem; }
+
+.filter-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* メモの要約 */
+.summary-block {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.summary-block .hint { margin-top: 0.4rem; }
+
+.summary-result {
+  margin-top: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.summary-result p { margin: 0 0 0.35rem; }
+.summary-result p:last-child { margin-bottom: 0; }
+
+.summary-result.is-info { background: #f0f0f0; color: var(--muted); }
+.summary-result.is-done { background: #eef4fb; border-left: 3px solid var(--accent); }
+.summary-result.is-error { background: #fdeeed; border-left: 3px solid var(--error); color: var(--error); }
+
+/* 日付の区切り */
+.date-group { margin-bottom: 1.5rem; }
+
+.date-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--line);
+}
+
+.today-badge {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+}
+
+/* 予定の行 */
+.rows { list-style: none; margin: 0; padding: 0; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
+}
+
+.row-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  min-width: 9.5em;
+}
+
+.row-room { min-width: 5em; }
+.row-instructor { color: var(--muted); }
+.row-tail { margin-left: auto; display: flex; align-items: center; gap: 0.5rem; }
+.row-note { font-size: 0.85rem; color: var(--muted); }
+
+.row-action {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+/* 休講は消さずに残す */
+.row.is-canceled { background: #f4f4f4; }
+.row.is-canceled .row-time,
+.row.is-canceled .row-room,
+.row.is-canceled .row-instructor {
+  text-decoration: line-through;
+  color: var(--canceled);
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--canceled);
+  color: var(--canceled);
+}
+
+/* 空のとき */
+.empty {
+  background: #fff;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.empty-title { margin: 0 0 0.4rem; font-weight: 600; }
+.empty-hint { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+/* フォーム */
+#schedule-form {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+#form-title { margin: 0 0 1.25rem; font-size: 1.1rem; }
+
+.field { margin-bottom: 1.1rem; flex: 1 1 12rem; }
+
+.field-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+.field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.field input,
+.field select {
+  font: inherit;
+  width: 100%;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.required {
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: #fff;
+  background: var(--muted);
+  border-radius: 3px;
+  padding: 0.05rem 0.35rem;
+  margin-left: 0.3rem;
+}
+
+.hint {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.error {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  color: var(--error);
+}
+
+.field:has(.error:not([hidden])) input,
+.field:has(.error:not([hidden])) select {
+  border-color: var(--error);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+/* 通知 */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #333;
+  color: #fff;
+  padding: 0.7rem 1.1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.toast[hidden] { display: none; }
+
+.toast-action {
+  background: transparent;
+  border: 1px solid #888;
+  color: #fff;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.85rem;
+}
